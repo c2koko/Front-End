@@ -3,7 +3,8 @@
  - `nvm use 20`
  - `npm i -g yarn`
  - `yarn`
- - `vite`
  - `npm install axios`
+ - `vite`
+ 
 
 # készítők: Horváth Henrik, Nyirő Teofil, Király Mátyás, Németh Kornél
