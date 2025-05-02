@@ -125,3 +125,5 @@ dist
 .pnp.*
 
 .DS_Store
+
+*.lock
