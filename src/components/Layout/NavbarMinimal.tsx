@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {rem, Button, useMantineTheme} from "@mantine/core";
-import {IconUserCircle,IconLogout,IconHome,IconMovie,IconKey,IconCopyCheck,IconSettings,IconList
+import {IconUserCircle,IconLogout,IconHome,IconMovie,IconKey,IconCopyCheck,IconKeyFilled,IconHexagonPlus,IconHexagonPlusFilled,IconSettings,IconList
 } from "@tabler/icons-react";
 import classes from "./NavbarMinimalColored.module.css";
 import {useNavigate} from "react-router-dom";
@@ -55,9 +55,27 @@ export function NavbarMinimal({toggle}: any) {
         //     url: "screenings"
         // },
         {
-            icon:IconKey,
+            icon:IconHexagonPlusFilled,
             label: "Film hozzáadása",
             url: "addmovie",
+            roles: ['Admin', 'Cashier']
+        },
+        {
+            icon:IconHexagonPlus,
+            label: "Vetítés hozzáadása",
+            url: "addscreening",
+            roles: ['Admin', 'Cashier']
+        },
+        {
+            icon:IconKeyFilled,
+            label: "Film Módosítása",
+            url: "altermovie",
+            roles: ['Admin', 'Cashier']
+        },
+        {
+            icon:IconKey,
+            label: "Vetítés Módosítása",
+            url: "alterscreening",
             roles: ['Admin', 'Cashier']
         },
         {
