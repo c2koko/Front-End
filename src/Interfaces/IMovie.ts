@@ -7,4 +7,18 @@ export interface IMovie {
     movieDuration: number;
     screenings: IScreening[];
     movieImg: string | null;
-} 
+}
+
+export interface IMovieUpdate {
+    movieName: string;
+    movieImg: string;
+    movieDescription: string;
+    movieDuration: number;
+  } 
+
+  export interface ICreateMovie{
+    movieName: string;
+    movieImg: string;
+    movieDescription: string;
+    movieDuration: number;
+  }

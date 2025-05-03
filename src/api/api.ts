@@ -1,4 +1,4 @@
-import { IMovie } from "../Interfaces/IMovie";
+import { ICreateMovie, IMovie, IMovieUpdate } from "../Interfaces/IMovie";
 import { IScreening } from "../Interfaces/IScreening";
 import { ISeat } from "../Interfaces/ISeat.ts";
 import axiosInstance from "./axios.config";
@@ -12,8 +12,11 @@ const Auth = {
     })
 }
 const Movies = {
-    getMovie: () => axiosInstance.get<IMovie[]>('/api/Movie/GetAllMovies')
-}
+    getMovie: () => axiosInstance.get<IMovie[]>(`/api/Movie/GetAllMovies`),
+    updateMovie: (id: string, data: IMovieUpdate) => axiosInstance.put<IMovie>(`/api/Admin/${id}`, data),
+    createMovie: (data: ICreateMovie) => axiosInstance.post<IMovie>('/api/Admin', data),
+    deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/${id}`),
+};
 const Screenings = {
     getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Screening/GetScreeningById/${movieId}`),
 };
