@@ -11,3 +11,14 @@ export interface ITicket {
     screeningId: number;
     screening: IScreening;
 }
+
+export interface ITicketCreateDto {
+    dateOfPurchase: string; 
+    price: number;
+    ticketVerified: boolean;
+    screeningId: number;
+}
+
+export interface TicketVerifyDto {
+    ticketVerified: boolean;
+  }

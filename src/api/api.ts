@@ -1,6 +1,7 @@
 import { ICreateMovie, IMovie, IMovieUpdate } from "../Interfaces/IMovie";
-import { IScreening } from "../Interfaces/IScreening";
-import { ISeat } from "../Interfaces/ISeat.ts";
+import { IScreening, ICreateScreeningDto, IUpdateScreeningDto } from "../Interfaces/IScreening";
+import { IChair } from "../Interfaces/IChair.ts";
+import {ITicket, ITicketCreateDto, ITicketVerifyDto} from "../Interfaces/ITicket.ts"
 import axiosInstance from "./axios.config";
 
 const Auth = {
@@ -18,9 +19,30 @@ const Movies = {
     deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/${id}`),
 };
 const Screenings = {
-    getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Screening/GetScreeningById/${movieId}`),
+    getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Admin/GetScreeningById/${movieId}`),
+    createScreening: (data: ICreateScreeningDto) =>
+        axiosInstance.post('/api/Admin/CreateScreening', data),
+
+    updateScreening: (screeningId: string ,data: IUpdateScreeningDto) =>
+        axiosInstance.put(`/api/Admin/UpdateScreening/${screeningId}`, data),
+
+    deleteScreening: (id: number) =>
+        axiosInstance.delete(`/api/Admin/DeleteScreening/${id}`),
 };
 const Seats ={
+    getAllChairs: () => 
+        axiosInstance.get<IChair[]>('/api/Chair/GetAllChair'),
+    getAvailableChairsForRoom: (roomId: number) =>
+        axiosInstance.get<IChair[]>(`/api/Chair/GetAvailableChairsForRoom/${roomId}`),
+};
+
+const Tickets = {   
+    createTicket: (data: ITicketCreateDto) =>
+        axiosInstance.post('/api/Ticket/CreateTicket', data), 
+    deleteTicket: (id: number) =>
+        axiosInstance.delete(`/api/Ticket/DeleteTicket/${id}`),
+    verifyTicket: (id: number, data: ITicketVerifyDto) =>
+        axiosInstance.put<ITicket>(`/api/Ticket/VerifyTicket/${id}`, data),
 };
 
 
