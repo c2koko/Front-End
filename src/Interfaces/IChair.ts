@@ -7,5 +7,5 @@
 export interface IChair{
     id: number;
     isReserved: boolean;
-    roomId: number;
+    screeningId: number;
 }

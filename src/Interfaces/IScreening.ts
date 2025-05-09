@@ -1,6 +1,7 @@
 import { IMovie } from "./IMovie";
 import { ITicket } from "./ITicket";
 import { IRoom } from "./IRoom";
+import { IChair } from "./IChair";
 
 export interface IScreening {
     id: number;
@@ -10,7 +11,7 @@ export interface IScreening {
     tickets: ITicket[];
     roomId : number;
     room: IRoom;
-
+    chairs: IChair[];
 }
 
 export interface ICreateScreeningDto{

@@ -32,8 +32,8 @@ const Screenings = {
 const Seats ={
     getAllChairs: () => 
         axiosInstance.get<IChair[]>('/api/Chair/GetAllChair'),
-    getAvailableChairsForRoom: (roomId: number) =>
-        axiosInstance.get<IChair[]>(`/api/Chair/GetAvailableChairsForRoom/${roomId}`),
+    getAvailableChairsForRoom: (screeningId: number) => axiosInstance.get<IChair[]>(`/api/chairs/GetAvailableChairsForRoom/${screeningId}`),
+    
 };
 
 const Tickets = {   
