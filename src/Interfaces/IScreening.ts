@@ -9,7 +9,7 @@ export interface IScreening {
     movie: IMovie;
     tickets: ITicket[];
     roomId : number;
-    room: Room;
+    room: IRoom;
 
 }
 
