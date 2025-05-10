@@ -26,7 +26,7 @@ const AddMovies = () => {
     const handleSubmit = async (values: typeof form.values) => {
 
     try {
-      
+
       const response = await api.Movies.createMovie({
         movieName: values.title,
         movieImg: values.coverUrl,
@@ -44,11 +44,13 @@ const AddMovies = () => {
 
     return <>
         <form onSubmit={form.onSubmit(handleSubmit)}>
-            <Stack style={{minWidth:"50rem"}}>
+            <Stack style={{
+              minWidth:"50rem",
+              }}>
                 <TextInput label="Film neve" placeholder="A Gyűrűk Ura: A gyűrű szövetsége" maxLength={100} w={"30%"} withAsterisk key={form.key('title')} {...form.getInputProps('title')}/>
                 <TextInput label="Film borítójának URL-je" placeholder="https://www.example.com/cover" maxLength={150} w={"30%"} key={form.key("coverUrl")} {...form.getInputProps('coverUrl')}/>
                 <Textarea label="Film rövid leírása" placeholder="A meek Hobbit from the Shire and eight companions..." maxLength={250} w={"30%"} h={"30%"} maxRows={5} key={form.key("description")} {...form.getInputProps('description')}/>
-                <NumberInput label="Film hossza" placeholder="120" clampBehavior="strict" w={"5rem"} key={form.key("druation")} {...form.getInputProps('duration')}/>
+                <NumberInput label="Film hossza" placeholder="120" clampBehavior="strict" w={"5rem"} key={form.key("druation")} {...form.getInputProps('duration') }/>
                 <Button w={"30%"} type="submit">Hozzáadás</Button>
             </Stack>
         </form>
