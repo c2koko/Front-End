@@ -19,8 +19,8 @@ const Movies = {
     deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/${id}`),
 };
 const Screenings = {
-    getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Admin/GetScreeningById/${movieId}`),
-    createScreening: (data: ICreateScreeningDto) =>
+    getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Screening/GetScreeningByMovieId/${movieId}`),
+   createScreening: (data: ICreateScreeningDto) =>
         axiosInstance.post('/api/Admin/CreateScreening', data),
 
     updateScreening: (screeningId: string ,data: IUpdateScreeningDto) =>
@@ -32,8 +32,8 @@ const Screenings = {
 const Seats ={
     getAllChairs: () => 
         axiosInstance.get<IChair[]>('/api/Chair/GetAllChair'),
-    getAvailableChairsForRoom: (roomId: number) =>
-        axiosInstance.get<IChair[]>(`/api/Chair/GetAvailableChairsForRoom/${roomId}`),
+    getAvailableChairsForRoom: (screeningId: number) => axiosInstance.get<IChair[]>(`/api/chairs/GetAvailableChairsForRoom/${screeningId}`),
+    
 };
 
 const Tickets = {   

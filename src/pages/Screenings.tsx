@@ -112,7 +112,7 @@ const Screenings = () => {
                                 <div>
                                     <Group gap="xs" mb={5}><IconCalendar size={18} stroke={1.5} /><Text fw={500}>{screeningDate}</Text></Group>
                                     <Group gap="xs" mb={5}><IconClock size={18} stroke={1.5} /><Text>{screeningTime}</Text></Group>
-                                    <Group gap="xs"><IconMapPin size={18} stroke={1.5} /><Text size="sm" c="dimmed">{item.screeningLocation || 'Ismeretlen helyszín'}</Text></Group>
+                                    {/*<Group gap="xs"><IconMapPin size={18} stroke={1.5} /><Text size="sm" c="dimmed">{item.screeningLocation || 'Ismeretlen helyszín'}</Text></Group>*/}
                                 </div>
                                 {/* JAVÍTOTT NAVIGÁCIÓ: /app/seats/ */}
                                 <Button color="blue" mt="md" radius="md" onClick={() => navigate(`/app/seats/${item.id}`)}>
