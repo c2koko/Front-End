@@ -5,6 +5,7 @@ import Movies from "../pages/Movies.tsx";
 import Screenings from "../pages/Screenings.tsx";
 import Seats from "../pages/Seats.tsx";
 import Purchase from "../pages/Purchase.tsx";
+import AddMovies from "../pages/AddMovie.tsx";
 export const routes = [
     {
         path: "login",
@@ -24,6 +25,11 @@ export const routes = [
     {
         path: "movies",
         component: <Movies/>,
+        isPrivate: true
+    },
+    {
+        path: "addMovie",
+        component: <AddMovies/>,
         isPrivate: true
     },
     {

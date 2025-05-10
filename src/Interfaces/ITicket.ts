@@ -19,6 +19,6 @@ export interface ITicketCreateDto {
     screeningId: number;
 }
 
-export interface TicketVerifyDto {
+export interface ITicketVerifyDto {
     ticketVerified: boolean;
   }
