@@ -14,6 +14,8 @@ const AuthenticatedRedirect = ({element}: {element: ReactElement}) => {
     return isLoggedIn ? <Navigate to="/app" /> : element;
 };
 
+
+
 const Routing = () => {
 
     return <Routes>
@@ -35,7 +37,7 @@ const Routing = () => {
             element={<PrivateRoute element={<BasicLayout />} />}>
             <Route
                 path=""
-                element={<Navigate to="dashboard" />}
+                element={<Navigate to="movies" />}
             />
             {
                 routes.filter(route => route.isPrivate).map(route => (

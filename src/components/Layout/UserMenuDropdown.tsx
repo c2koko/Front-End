@@ -28,7 +28,8 @@ const UserMenuDropdown = () => {
         }
     ]
 
-    const profileName = <>{email}</>
+    //const profileName = <>{email}</>
+    const profileName = <> {email === "________@________.________" ? null : email} </>;
 
     return <>
         <Menu
