@@ -56,15 +56,16 @@ const Login = () => {
                 </Stack>
 
                 <Group justify="space-between" mt="xl">
-                    <Anchor component="button" type="button" c="dimmed" onClick={() => navigate('/forgot')}
+                    {/* <Anchor component="button" type="button" c="dimmed" onClick={() => navigate('/forgot')}
                             size="xs">
                         Elfelejtetted a jelszavad?
-                    </Anchor>
+                    </Anchor> */}
                     <Button type="submit" radius="xl">
                         Bejelentkezés
                     </Button>
                 </Group>
                 <Divider my="lg"/>
+                <Anchor component="button" type="button" c="dimmed" size="sm" onClick={() => { login("________@________.________", "________"); }} > Nem szeretnék belépni </Anchor>
             </form>
         </div>
     </AuthContainer>
