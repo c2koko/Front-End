@@ -497,25 +497,23 @@ const loadAvailableSeats = async (scrId: number) => {
 };
 
 
-  const handleSeatClick = (seatNumber: number) => {
-    if (!availableSeats.includes(seatNumber)) return;
+  const handleSeatClick = (chairId: number) => {
+  if (!availableSeats.includes(chairId)) return;
 
-    setSelectedSeats(prev =>
-      prev.includes(seatNumber)
-        ? prev.filter(n => n !== seatNumber)
-        : [...prev, seatNumber]
-    );
-  };
+  setSelectedSeats(prev =>
+    prev.includes(chairId)
+      ? prev.filter(id => id !== chairId)
+      : [...prev, chairId]
+  );
+};
 
   const renderSeats = () => {
-   const seats = [];
-  
+  const seats = [];
   for (let i = 1; i <= 100; i++) {
-    // Keresd meg a széket az ID alapján (6000 + i - 1)
     const chairId = 6000 + (i - 1);
     const isAvailable = availableSeats.includes(chairId);
-    const isSelected = selectedSeats.includes(i);
-    
+    const isSelected = selectedSeats.includes(chairId); // <-- chairId-t használj!
+
     seats.push(
       <Button
         key={i}
@@ -526,15 +524,14 @@ const loadAvailableSeats = async (scrId: number) => {
         disabled={!isAvailable}
         m={4}
         p={0}
-        onClick={() => handleSeatClick(i)}
+        onClick={() => handleSeatClick(chairId)} // <-- chairId-t adj át!
       >
         {i}
       </Button>
     );
   }
   return seats;
-  };
-
+};
   return (
     <>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -557,8 +554,10 @@ const loadAvailableSeats = async (scrId: number) => {
         )}
 
         {selectedSeats.length > 0 && (
-          <Text mt="md">Kiválasztott székek: {selectedSeats.join(', ')}</Text>
-        )}
+    <Text mt="md">
+        Kiválasztott székek: {selectedSeats.map(id => id - 6000 + 1).join(', ')}
+    </Text>
+    )}
       </Card>
 
       <Button
