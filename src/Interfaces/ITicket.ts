@@ -1,5 +1,6 @@
 import { IScreening } from "./IScreening";
 import { IUser } from "./IUser";
+import { IChair } from "./IChair";
 
 export interface ITicket {
     id: number;
@@ -17,6 +18,7 @@ export interface ITicketCreateDto {
     price: number;
     ticketVerified: boolean;
     screeningId: number;
+    chairs: IChair[];
 }
 
 export interface ITicketVerifyDto {

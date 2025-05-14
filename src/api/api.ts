@@ -34,6 +34,8 @@ const Seats ={
     getAllChairs: () => 
         axiosInstance.get<IChair[]>('/api/Chair/GetAllChair'),
     getAvailableChairsForRoom: (screeningId: number) => axiosInstance.get<IChair[]>(`/api/chairs/GetAvailableChairsForRoom/${screeningId}`),
+    //updateReservation: (id: number) => axiosInstance.patch(`/api/Chair/UpdateReservation/${id}`)
+    updateReservation: (id: number) => axiosInstance.patch(`/api/chairs/UpdateReservation/${id}`) // <-- kisbetűs és többes szám
     
 };
 
@@ -62,6 +64,6 @@ const Tickets = {
 // }
 
 
-const api = {Movies, Screenings, Seats, Auth};
+const api = {Movies, Screenings, Seats, Auth, Tickets};
 
 export default api;
