@@ -19,6 +19,7 @@ const Movies = {
     deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/${id}`),
 };
 const Screenings = {
+    getScreeningById: (id: number | string) => axiosInstance.get<IScreening>(`/api/Screening/GetScreeningById/${id}`),
     getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Screening/GetScreeningByMovieId/${movieId}`),
    createScreening: (data: ICreateScreeningDto) =>
         axiosInstance.post('/api/Admin/CreateScreening', data),

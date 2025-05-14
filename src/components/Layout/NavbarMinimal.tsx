@@ -47,7 +47,7 @@ export function NavbarMinimal({toggle}: any) {
             icon:IconMovie,
             label: "Filmek",
             url: "movies",
-            roles: ['Admin', 'RegisteredUser', 'Cashier']
+            roles: ['Admin', 'RegisteredUser', 'Cashier', 'NotRegisteredUser']
         },
         // {
         //     icon:IconMovie,
