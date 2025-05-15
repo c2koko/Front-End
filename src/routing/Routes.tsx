@@ -7,6 +7,8 @@ import Seats from "../pages/Seats.tsx";
 import Purchase from "../pages/Purchase.tsx";
 import AddMovies from "../pages/AddMovie.tsx";
 import ModifyMovie from "../pages/ModifyMovies.tsx"
+import UpdateMovie from "../pages/UpdateMovie.tsx";
+import Addscreening from "../pages/AddScreening.tsx";
 export const routes = [
     {
         path: "login",
@@ -36,6 +38,16 @@ export const routes = [
     {
         path: "modifyMovie",
         component: <ModifyMovie/>,
+        isPrivate: true
+    },
+    {
+    path: "updatemovie/:id",
+    component: <UpdateMovie />,
+    isPrivate: true
+    },
+    {
+        path: "addscreening/:movieId",
+        component: <Addscreening />,
         isPrivate: true
     },
     {

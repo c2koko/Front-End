@@ -14,9 +14,9 @@ const Auth = {
 }
 const Movies = {
     getMovie: () => axiosInstance.get<IMovie[]>(`/api/Movie/GetAllMovies`),
-    updateMovie: (id: string, data: IMovieUpdate) => axiosInstance.put<IMovie>(`/api/Admin/${id}`, data),
+    updateMovie: (id: string, data: IMovieUpdate) => axiosInstance.put<IMovie>(`/api/Admin/UpdateMovie/${id}`, data),
     createMovie: (data: ICreateMovie) => axiosInstance.post<IMovie>('/api/Admin/CreateMovie', data),
-    deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/${id}`),
+    deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/DeleteMovie/${id}`),
 };
 const Screenings = {
     getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Screening/GetScreeningByMovieId/${movieId}`),

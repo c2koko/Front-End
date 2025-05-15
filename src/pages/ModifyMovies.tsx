@@ -18,6 +18,17 @@ const ModifyMovies = () => {
       });
     }, []);
 
+
+    const deleteMovie = async (id: string) => {
+    try {
+      console.log(id);
+      await api.Movies.deleteMovie(id); // Küldi a DELETE kérést
+      setMovies((prev) => prev.filter((movie) => movie.id !== Number(id))); // Frissít frontenden
+    } catch (error) {
+      console.error("Hiba a film törlésekor:", error);
+    }
+  };
+
     const cards = movies.map((movie) => (
       <Card shadow="sm" padding="md" radius="md" withBorder key={movie.id}>
       <Card.Section>
@@ -40,13 +51,13 @@ const ModifyMovies = () => {
           justifyContent: 'center',
           
       }}>
-        <Button color="blue" mt="md" radius="md"  pl={'1rem'} pr={'1rem'}>
+        <Button color="blue" mt="md" radius="md"  pl={'1rem'} pr={'1rem'} onClick={() => navigate(`/app/updatemovie/${movie.id}`)}>
         Film módosítása
       </Button>
-      <Button color="blue" mt="md" radius="md" pl={'1rem'} pr={'1rem'}>
-        Vetítés módosítása
+      <Button color="blue" mt="md" radius="md" pl={'1rem'} pr={'1rem'} onClick={() => navigate(`/app/addscreening/${movie.id}`)}>
+        Vetítés hozzáadása
       </Button>
-      <Button color="blue" mt="md" radius="md" pl={'1rem'} pr={'1rem'}>
+      <Button color="blue" mt="md" radius="md" pl={'1rem'} pr={'1rem'} onClick={() =>deleteMovie(movie.id.toString())}>
         Törlés
       </Button>
       </Group>
