@@ -16,20 +16,30 @@ const AddScreening = () => {
   });
 
   const handleSubmit = async (values: typeof form.values) => {
-    try {
-      const screeningData = {
-        screeningStartTime: values.screeningStartTime.toISOString(),
-        movieId: Number(movieId),
-        roomId: values.roomId,
-      };
+  try {
+    let screeningStartTimeISO: string;
 
-      await api.Screenings.createScreening(screeningData);
-      console.log("Vetítés létrehozva!");
-      navigate("/modifyMovie"); // vagy vissza a filmhez
-    } catch (error) {
-      console.error("Hiba vetítés hozzáadásakor:", error);
+    if (values.screeningStartTime instanceof Date) {
+      screeningStartTimeISO = values.screeningStartTime.toISOString();
+    } else if (typeof values.screeningStartTime === 'string') {
+      screeningStartTimeISO = new Date(values.screeningStartTime).toISOString();
+    } else {
+      throw new Error("Érvénytelen dátum formátum a vetítéshez.");
     }
-  };
+
+    const screeningData = {
+      screeningStartTime: screeningStartTimeISO,
+      movieId: Number(movieId),
+      roomId: values.roomId,
+    };
+
+    await api.Screenings.createScreening(screeningData);
+    console.log("Vetítés létrehozva!");
+    navigate("/app/modifyMovie");
+  } catch (error) {
+    console.error("Hiba vetítés hozzáadásakor:", error);
+  }
+};
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
