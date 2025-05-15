@@ -19,6 +19,7 @@ const Movies = {
     deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/DeleteMovie/${id}`),
 };
 const Screenings = {
+    getScreeningById: (id: number | string) => axiosInstance.get<IScreening>(`/api/Screening/GetScreeningById/${id}`),
     getScreening: (movieId: string | number) =>axiosInstance.get<IScreening[]>(`/api/Screening/GetScreeningByMovieId/${movieId}`),
    createScreening: (data: ICreateScreeningDto) =>
         axiosInstance.post('/api/Admin/CreateScreening', data),
@@ -33,6 +34,8 @@ const Seats ={
     getAllChairs: () => 
         axiosInstance.get<IChair[]>('/api/Chair/GetAllChair'),
     getAvailableChairsForRoom: (screeningId: number) => axiosInstance.get<IChair[]>(`/api/chairs/GetAvailableChairsForRoom/${screeningId}`),
+    //updateReservation: (id: number) => axiosInstance.patch(`/api/Chair/UpdateReservation/${id}`)
+    updateReservation: (id: number) => axiosInstance.patch(`/api/chairs/UpdateReservation/${id}`) // <-- kisbetűs és többes szám
     
 };
 
@@ -61,6 +64,6 @@ const Tickets = {
 // }
 
 
-const api = {Movies, Screenings, Seats, Auth};
+const api = {Movies, Screenings, Seats, Auth, Tickets};
 
 export default api;

@@ -116,7 +116,7 @@ const Screenings = () => {
                                 </div>
                                 {/* JAVÍTOTT NAVIGÁCIÓ: /app/seats/ */}
                                 <Button color="blue" mt="md" radius="md" onClick={() => navigate(`/app/seats/${item.id}`)}>
-                                    Szék(ek) kiválasztása
+                                    Jegy ára: 1500 Ft
                                 </Button>
                             </Group>
                         </Card>
