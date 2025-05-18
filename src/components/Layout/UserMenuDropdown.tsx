@@ -1,5 +1,5 @@
 import {Avatar, Text, Group, Menu, rem, UnstyledButton, useMantineTheme, Flex, Center} from "@mantine/core";
-import {IconChevronDown, IconLogout, IconUserCircle} from "@tabler/icons-react";
+import {IconChevronDown, IconLogout, IconUserCircle, IconTicket} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
 import {useMediaQuery} from "@mantine/hooks";
 import useAuth from "../../hooks/useAuth.tsx";
@@ -12,20 +12,29 @@ const UserMenuDropdown = () => {
     const {logout, email} = useAuth();
 
     const items = [
+        // {
+        //     url: 'profile',
+        //     label: "Profil",
+        //     onClick: () => {
+        //         navigate('profile');
+        //     },
+        //     icon: IconUserCircle
+        // },
         {
-            url: 'profile',
-            label: "Profil",
+            url: 'usertickets',
+            label: "Vásárolt jegyek",
             onClick: () => {
-                navigate('profile');
+                navigate('UserTickets');
             },
-            icon: IconUserCircle
+            icon: IconTicket
         },
         {
             url: 'logout',
             label: "Kijelentkezés",
             onClick: () => {logout()},
             icon: IconLogout
-        }
+        },
+        
     ]
 
     //const profileName = <>{email}</>

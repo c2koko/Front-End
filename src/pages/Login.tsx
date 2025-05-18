@@ -15,6 +15,8 @@ const Login = () => {
     const {login} = useAuth();
     const navigate = useNavigate();
 
+    const handleClick = () => { navigate('/app/register'); };
+
     const form = useForm({
         initialValues: {
             email: '',
@@ -28,9 +30,19 @@ const Login = () => {
     });
 
 
-    const submit = () => {
-        login(form.values.email, form.values.password)
+    // const submit = () => {
+    //     login(form.values.email, form.values.password)
+    // }
+    const submit = async () => {
+    try {
+        const response = await login(form.values.email, form.values.password);
+        console.log('Bejelentkezett user ID:', response.userId);
+    } catch (err) {
+        console.error('Bejelentkezés hiba:', err);
     }
+};
+
+
 
     return <AuthContainer>
         <div>
@@ -63,6 +75,9 @@ const Login = () => {
                     <Button type="submit" radius="xl">
                         Bejelentkezés
                     </Button>
+                    <Button onClick={handleClick} radius="xl" color="violet">
+                        Regisztrálás
+                    </Button>
                 </Group>
                 <Divider my="lg"/>
                 <Anchor component="button" type="button" c="dimmed" size="sm" onClick={() => { login("________@________.________", "________"); }} > Nem szeretnék belépni </Anchor>
@@ -72,3 +87,5 @@ const Login = () => {
 }
 
 export default Login;
+
+

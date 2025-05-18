@@ -18,7 +18,8 @@ export interface ITicketCreateDto {
     price: number;
     ticketVerified: boolean;
     screeningId: number;
-    chairs: IChair[];
+    userId: number;
+    chairs: number[];
 }
 
 export interface ITicketVerifyDto {

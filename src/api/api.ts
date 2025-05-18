@@ -1,6 +1,7 @@
 import { ICreateMovie, IMovie, IMovieUpdate } from "../Interfaces/IMovie";
 import { IScreening, ICreateScreeningDto, IUpdateScreeningDto } from "../Interfaces/IScreening";
 import { IChair } from "../Interfaces/IChair.ts";
+import { IUser, IUserRegisterDto } from "../Interfaces/IUser.ts"
 import {ITicket, ITicketCreateDto, ITicketVerifyDto} from "../Interfaces/ITicket.ts"
 import axiosInstance from "./axios.config";
 
@@ -10,7 +11,8 @@ const Auth = {
         email: email,
         username: email,
         password: password
-    })
+    }),
+    registerUser: (data: IUserRegisterDto) => axiosInstance.post('/api/User/RegisterUser', data),
 }
 const Movies = {
     getMovie: () => axiosInstance.get<IMovie[]>(`/api/Movie/GetAllMovies`),
@@ -46,6 +48,8 @@ const Tickets = {
         axiosInstance.delete(`/api/Ticket/DeleteTicket/${id}`),
     verifyTicket: (id: number, data: ITicketVerifyDto) =>
         axiosInstance.put<ITicket>(`/api/Ticket/VerifyTicket/${id}`, data),
+    getTicketsByUserId: (userId: number) =>
+        axiosInstance.get<ITicket[]>(`/api/Ticket/GetTicketsByUserId?id=${userId}`),
 };
 
 

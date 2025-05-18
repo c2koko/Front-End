@@ -9,6 +9,8 @@ import AddMovies from "../pages/AddMovie.tsx";
 import ModifyMovie from "../pages/ModifyMovies.tsx"
 import UpdateMovie from "../pages/UpdateMovie.tsx";
 import Addscreening from "../pages/AddScreening.tsx";
+import UserTickets from "../pages/UserTickets.tsx";
+import Register from "../pages/Register.tsx"
 export const routes = [
     {
         path: "login",
@@ -41,9 +43,9 @@ export const routes = [
         isPrivate: true
     },
     {
-    path: "updatemovie/:id",
-    component: <UpdateMovie />,
-    isPrivate: true
+        path: "updatemovie/:id",
+        component: <UpdateMovie />,
+        isPrivate: true
     },
     {
         path: "addscreening/:movieId",
@@ -63,6 +65,16 @@ export const routes = [
     {
         path: "purchase",
         component: <Purchase/>,
+        isPrivate: true
+    },
+    {
+        path: "usertickets",
+        component: <UserTickets/>,
+        isPrivate: true
+    },
+    {
+        path: "register",
+        component: <Register/>,
         isPrivate: true
     },
 ]

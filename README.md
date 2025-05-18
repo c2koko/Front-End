@@ -3,10 +3,14 @@
 # ez után egyesével futtasd a kódokat terminálban !! figyelj, van ahol nVm és nPm !!
  - `nvm install 20`
  - `nvm use 20`
+ # Powershellbe, adminisztrátorként: `Set-ExecutionPolicy -Scope CurrentUser ExecutionPolicy RemoteSigned`
  - `npm i -g yarn`
  - `yarn`
  - `npm install axios`
  - `vite`
+ - `yarn add @mantine/dates`
+ - `yarn add dayjs`
+
 
 # használat: 
 #   indítsd el a back-end kódot és az SSMS-t

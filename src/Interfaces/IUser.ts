@@ -12,3 +12,11 @@ export interface IUser {
     role: IRole;
     tickets: ITicket[];
 }
+export interface IUserRegisterDto {
+  username: string;
+  password: string;
+  name: string;
+  email: string;
+  phone: string;
+  roleId: number;
+}

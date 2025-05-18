@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 
 const PrivateRoute = ({element}: {element: ReactElement}) => {
     const { isLoggedIn } = useAuth();
-    return isLoggedIn ? element : <Navigate to="/login" />;
+    return isLoggedIn ? element : element;//<Navigate to="/login" />;
 };
 
 const AuthenticatedRedirect = ({element}: {element: ReactElement}) => {
