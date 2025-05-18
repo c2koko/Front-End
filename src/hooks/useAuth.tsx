@@ -3,6 +3,7 @@ import {AuthContext} from "../context/AuthContext.tsx";
 import {emailKeyName, roleKeyName, tokenKeyName} from "../constants/constants.ts";
 import api from "../api/api.ts";
 import {jwtDecode} from "jwt-decode";
+import { Navigate } from "react-router-dom";
 
 const useAuth = () => {
     const { token, setToken, email, setEmail, role, setRole  } = useContext(AuthContext);
@@ -65,8 +66,10 @@ const useAuth = () => {
 
 
     const logout = () => {
+        console.log('kijelentkezés')
         localStorage.clear();
         setToken(null);
+        <Navigate to="/login/" />
     }
 
     useEffect(() => {

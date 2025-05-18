@@ -25,7 +25,7 @@ const Login = () => {
 
         validate: {
             email: (val: string) => (/^\S+@\S+$/.test(val) ? null : 'Kérlek adj meg egy érvényes e-mail címet.'),
-            password: (val: string) => (val.length <= 6 ? 'A jelszó nem tartalmaz legalább 6 karaktert' : null),
+            password: (val: string) => (val.length <= 5 ? 'A jelszó nem tartalmaz legalább 6 karaktert' : null),
         },
     });
 

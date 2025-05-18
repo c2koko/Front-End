@@ -7,36 +7,6 @@ export const UserTickets = () => {
   const [tickets, setTickets] = useState<ITicket[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTickets = async () => {
-    try {
-      const userId = Number(localStorage.getItem("userId"));
-      const response = await api.Tickets.getTicketsByUserId(userId);
-
-      // Ha JSON.NET-es válasz, a jegyek a $values mezőben vannak
-      const data = response.data?.$values ?? response.data;
-      if (Array.isArray(data)) {
-        setTickets(data);
-      } else {
-        setError("Váratlan válaszformátum");
-        console.error("Váratlan válasz:", response.data);
-      }
-    } catch (err) {
-      console.error("Jegyek lekérése sikertelen:", err);
-      setError("Jegyek lekérése sikertelen");
-    }
-  };
-
-  const deleteTicket = async (ticketId: number) => {
-    try {
-      await api.Tickets.deleteTicket(ticketId);
-      await fetchTickets(); // frissítés törlés után
-    } catch (err) {
-      console.error("Hiba a jegy törlésekor:", err);
-      setError("Hiba történt a jegy törlése közben");
-    }
-  };
-
-  useEffect(() => {
     const fetchTickets = async () => {
   try {
     const userId = Number(localStorage.getItem("userId"));
@@ -57,6 +27,20 @@ export const UserTickets = () => {
   }
 };
 
+  const deleteTicket = async (ticketId: number) => {
+    try {
+      console.log("Törlendő jegy ID:", ticketId);
+      //console.log("Token:", localStorage.getItem("token"));
+      await api.Tickets.deleteTicket(ticketId);
+      await fetchTickets(); // frissítés törlés után
+    } catch (err) {
+      console.error("Hiba a jegy törlésekor:", err);
+      setError("Hiba történt a jegy törlése közben");
+    }
+  };
+
+  useEffect(() => {
+    fetchTickets();
   }, []);
 
   return (
@@ -77,12 +61,19 @@ export const UserTickets = () => {
         {tickets.map(ticket => (
           <Card key={ticket.id} shadow="sm" padding="lg">
             <Stack spacing="xs">
-              <Text><strong>Vetítés ID:</strong> {ticket.screeningId}</Text>
-              <Text><strong>Ár:</strong> {ticket.price} Ft</Text>
               <Text>
                 <strong>Vásárlás dátuma:</strong>{" "}
-                {new Date(ticket.dateOfPurchase).toLocaleDateString("hu-HU")}
+{new Date(new Date(ticket.dateOfPurchase).getTime() + 2 * 60 * 60 * 1000).toLocaleString("hu-HU", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+})}
+
               </Text>
+              <Text><strong>Ár:</strong> {ticket.price} Ft</Text>
+              
               <Group >
                 <Button
                   color="red"

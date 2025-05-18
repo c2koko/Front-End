@@ -117,14 +117,14 @@ export function NavbarMinimal({toggle}: any) {
                     {links}
                 </div>
                 <div className={classes.footer} style={{width: !isMobile ? '216px' : '90%'}}>
-                    <NavbarLink
+                    {/* <NavbarLink
                         active={location.pathname === '/profile'}
                         icon={IconUserCircle}
                         label="Profil"
                         onClick={() => {
                             navigate("profile");
                             toggle();
-                        }} color="grape" />
+                        }} color="grape" /> */}
                     <NavbarLink
                         icon={IconLogout}
                         label={"Kijelentkezés"}
