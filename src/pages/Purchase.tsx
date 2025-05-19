@@ -193,7 +193,9 @@ const Purchase = () => {
   // Szék szám kiszedése (pl. 101 -> 1)
   useEffect(() => {
     if (state?.seats) {
-      setSeatNumbers(state.seats.map(id => id % 100));
+      //setSeatNumbers(state.seats.map(id => id % 100));
+      setSeatNumbers(state.seats.map(id => (id % 100) + 1));
+
     }
   }, [state]);
 

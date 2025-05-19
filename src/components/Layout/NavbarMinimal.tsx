@@ -89,6 +89,7 @@ export function NavbarMinimal({toggle}: any) {
 
     const onLogout = () => {
         logout();
+        navigate('/login');
     }
 
     useEffect(() => {

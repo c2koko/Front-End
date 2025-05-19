@@ -69,7 +69,7 @@ const useAuth = () => {
         console.log('kijelentkezés')
         localStorage.clear();
         setToken(null);
-        <Navigate to="/login/" />
+        
     }
 
     useEffect(() => {

@@ -31,7 +31,7 @@ const UserMenuDropdown = () => {
         {
             url: 'logout',
             label: "Kijelentkezés",
-            onClick: () => {logout()},
+            onClick: () => {logout(); navigate('/login')},
             icon: IconLogout
         },
         
