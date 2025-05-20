@@ -80,7 +80,7 @@ const Login = () => {
                     </Button>
                 </Group>
                 <Divider my="lg"/>
-                <Anchor component="button" type="button" c="dimmed" size="sm" onClick={() => { login("________@________.________", "________"); }} > Nem szeretnék belépni </Anchor>
+                <Anchor component="button" type="button" c="dimmed" size="sm" onClick={() => { /*login("________@________.________", "________");*/ navigate('/app/movies') }} > Nem szeretnék belépni </Anchor>
             </form>
         </div>
     </AuthContainer>
