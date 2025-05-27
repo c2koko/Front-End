@@ -10,7 +10,9 @@ import ModifyMovie from "../pages/ModifyMovies.tsx"
 import UpdateMovie from "../pages/UpdateMovie.tsx";
 import Addscreening from "../pages/AddScreening.tsx";
 import UserTickets from "../pages/UserTickets.tsx";
-import Register from "../pages/Register.tsx"
+import Register from "../pages/Register.tsx";
+import ModifyMovieScreening from "../pages/ModifyMovieScreenings.tsx";
+import UpdateScreening from "../pages/UpdateScreening.tsx";
 export const routes = [
     {
         path: "login",
@@ -50,6 +52,16 @@ export const routes = [
     {
         path: "addscreening/:movieId",
         component: <Addscreening />,
+        isPrivate: true
+    },
+    {
+        path: "modifymoviescreening/:movieId",
+        component: <ModifyMovieScreening />,
+        isPrivate: true
+    },
+    {
+        path: "updatescreening/:movieId/:screeningId",
+        component: <UpdateScreening />,
         isPrivate: true
     },
     {

@@ -61,21 +61,9 @@ export function NavbarMinimal({toggle}: any) {
             roles: ['Admin', 'Cashier']
         },
         {
-            icon:IconHexagonPlus,
-            label: "Vetítés hozzáadása",
-            url: "addscreening",
-            roles: ['Admin', 'Cashier']
-        },
-        {
             icon:IconKeyFilled,
             label: "Film Módosítása",
             url: "modifymovie",
-            roles: ['Admin', 'Cashier']
-        },
-        {
-            icon:IconKey,
-            label: "Vetítés Módosítása",
-            url: "alterscreening",
             roles: ['Admin', 'Cashier']
         },
         {

@@ -33,9 +33,7 @@ const ModifyMovies = () => {
       <Card shadow="sm" padding="md" radius="md" withBorder key={movie.id}>
       <Card.Section>
         <Image
-          src={movie.movieImg}
-          height={160}
-          alt={movie.movieName}
+          src={movie.movieImg || '/image_jegymesterASCII.png'} height={160}alt={`${movie.movieName ?? 'Movie'} film borítókép`}
         />
       </Card.Section>
       <Text size="lg">
@@ -56,6 +54,9 @@ const ModifyMovies = () => {
       </Button>
       <Button color="blue" mt="md" radius="md" pl={'1rem'} pr={'1rem'} onClick={() => navigate(`/app/addscreening/${movie.id}`)}>
         Vetítés hozzáadása
+      </Button>
+      <Button color="blue" mt="md" radius="md" pl={'1rem'} pr={'1rem'} onClick={() => navigate(`/app/modifymoviescreening/${movie.id}`)}>
+        Vetítések megtekintése
       </Button>
       <Button color="blue" mt="md" radius="md" pl={'1rem'} pr={'1rem'} onClick={() =>deleteMovie(movie.id.toString())}>
         Törlés

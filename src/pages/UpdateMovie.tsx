@@ -36,6 +36,8 @@ const UpdateMovie = () => {
             description: movie.movieDescription,
             duration: movie.movieDuration,
           });
+
+          console.log(movie.duration);
         }
       } catch (error) {
         console.error("Hiba a film lekérésekor:", error);
