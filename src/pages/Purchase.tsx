@@ -154,7 +154,9 @@
 // };
 
 // export default Purchase;// src/pages/Purchase.tsx
-import { Card, Text, Alert, Button, Loader, Group } from '@mantine/core';
+import { Card, Text, Alert, Button, Loader, Group, Box, Collapse } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+
 import { IconInfoCircle } from '@tabler/icons-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -170,6 +172,8 @@ interface PurchaseState {
 }
 
 const Purchase = () => {
+  const [opened, { toggle }] = useDisclosure(false); // A Collapse-hez
+
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as PurchaseState | undefined;
@@ -256,6 +260,7 @@ const Purchase = () => {
   if (error) return <Alert color="red">{error}</Alert>;
 
   return (
+    <>
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Alert
         variant="light"
@@ -282,7 +287,20 @@ const Purchase = () => {
         Fizetés
       </Button>
     </Card>
+    {/* Fontos Információk rész (a map-en KÍVÜL) */}
+                 <Box maw={400} mx="auto" mt="xl">
+                     <Group justify="center" mb={5}>
+                         <Button onClick={toggle}>Fontos információk</Button>
+                     </Group>
+                     <Collapse in={opened}>
+                         <Card withBorder p="md" radius="md">
+                             <Text>Tisztelt Vásárlónk! Felhívjuk szíves figyelmét, hogy a regisztrált felhasználók a vásárlást követően megtekinthetik a profiljukban a megvásárolt jegyek listáját. Amennyiben mégsem kívánják igénybe venni a jegyet, lehetőségük van a vásárlás törlésére legkésőbb a vetítés kezdete előtt 4 órával. Köszönjük!</Text>
+                         </Card>
+                     </Collapse>
+                 </Box>
+    </>
   );
+  
 };
 
 export default Purchase;

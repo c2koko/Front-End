@@ -96,6 +96,7 @@ interface IUserRegisterDto {
   username: string;
   password: string;
   email: string;
+  phone: string;
 }
 
 export const Register = () => {
@@ -109,12 +110,14 @@ export const Register = () => {
       username: '',
       password: '',
       email: '',
+      phone: '',
     },
 
     validate: {
       email: (value) => (/^\S+@\S+\.\S+$/.test(value) ? null : 'Érvénytelen email cím'),
       password: (value) => (value.length < 6 ? 'Legalább 6 karakter' : null),
       username: (value) => (value.length < 3 ? 'Legalább 3 karakter' : null),
+      phone: (value) => (value.length < 10 ? 'Legalább 11 karakter' : null),
     },
   });
 
@@ -124,8 +127,8 @@ export const Register = () => {
       await api.Auth.registerUser({
         ...values,
         name: '',
-        phone: '',
-        roleId: 1,
+        
+        roleId: 2,
       });
       // automatikus bejelentkezés regisztráció után
       await login(values.email, values.password);
@@ -156,6 +159,12 @@ export const Register = () => {
           placeholder="pl. user123"
           {...form.getInputProps('username')}
           mb="sm"
+        />
+        <TextInput
+          label="Phone"
+          placeholder="telefonszám"
+          {...form.getInputProps('phone')}
+          mb="lg"
         />
         <PasswordInput
           label="Jelszó"

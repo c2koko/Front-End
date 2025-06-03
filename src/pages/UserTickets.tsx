@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Container, Title, Stack, Card, Text, Button, Group, Notification } from "@mantine/core";
+import { Container, Title, Stack, Card, Text, Button, Group, Notification, Box, Collapse } from "@mantine/core";
+import { useDisclosure } from '@mantine/hooks';
 import api from '../api/api';
 import { ITicket } from '../Interfaces/ITicket';
 
 export const UserTickets = () => {
+    const [opened, { toggle }] = useDisclosure(false); // A Collapse-hez
   const [tickets, setTickets] = useState<ITicket[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,6 +46,7 @@ export const UserTickets = () => {
   }, []);
 
   return (
+    <>
     <Container>
       <Title order={2} mb="md">Jegyeim</Title>
 
@@ -88,7 +91,20 @@ export const UserTickets = () => {
         ))}
       </Stack>
     </Container>
+    {/* Fontos Információk rész (a map-en KÍVÜL) */}
+                 <Box maw={400} mx="auto" mt="xl">
+                     <Group justify="center" mb={5}>
+                         <Button onClick={toggle}>Fontos információk</Button>
+                     </Group>
+                     <Collapse in={opened}>
+                         <Card withBorder p="md" radius="md">
+                             <Text>Korábban megvásárolt jegyek törlésére a vetítés kezdete előtti 4 órában nincsen lehetőség!</Text>
+                         </Card>
+                     </Collapse>
+                 </Box>
+    </>
   );
+
 };
 
 export default UserTickets;
