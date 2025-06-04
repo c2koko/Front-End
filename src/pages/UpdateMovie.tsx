@@ -18,7 +18,7 @@ const UpdateMovie = () => {
       duration: 0,
     },
     validate: {
-      duration: (value: number) => (isNaN(Number(value)) ? 'A hossz szám legyen' : null),
+      duration: (value: number) => (isNaN(value) ? 'A hossz szám legyen' : null),
       title: (value: string) => (value.length < 2 ? 'A cím túl rövid' : null),
     },
   });
@@ -27,17 +27,22 @@ const UpdateMovie = () => {
     // Betöltjük az adott film adatait
     const fetchMovie = async () => {
       try {
-        const res = await api.Movies.getMovie(); // az összes filmet lekéri
-        const movie = res.data.$values.find((m: any) => m.id === Number(id));
+        const res = await api.Movies.getMovieById(id!);
+        const movie = res.data;
+
+        console.log("Film adatok:", movie);
+        
+
         if (movie) {
           form.setValues({
             title: movie.movieName,
-            coverUrl: movie.movieImg,
-            description: movie.movieDescription,
-            duration: movie.movieDuration,
+            // Ha kép nem létezik, aakkor egy alapértelmezett urlt kap
+            coverUrl: (movie.movieImg ? movie.movieImg : '/image_jegymesterASCII.png'),
+            // Ha a leírás nem létezik, akkor egy üres stringet kap
+            description: (movie.movieDescription ? movie.movieDescription : ''),
+            duration: movie.movieDuration
           });
 
-          console.log(movie.duration);
         }
       } catch (error) {
         console.error("Hiba a film lekérésekor:", error);
@@ -45,6 +50,7 @@ const UpdateMovie = () => {
     };
 
     fetchMovie();
+    console.log(form.values);
   }, [id]);
 
   const handleSubmit = async (values: typeof form.values) => {
@@ -53,7 +59,7 @@ const UpdateMovie = () => {
         movieName: values.title,
         movieImg: values.coverUrl,
         movieDescription: values.description,
-        movieDuration: values.duration,
+        movieDuration: Number(values.duration),
       };
 
       await api.Movies.updateMovie(id!, updateData);
@@ -67,10 +73,10 @@ const UpdateMovie = () => {
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack style={{ minWidth: "50rem" }}>
-        <TextInput label="Film neve" withAsterisk {...form.getInputProps("title")} />
-        <TextInput label="Borítókép URL" {...form.getInputProps("coverUrl")} />
-        <Textarea label="Leírás" {...form.getInputProps("description")} maxRows={5} />
-        <NumberInput label="Hossz (perc)" {...form.getInputProps("duration")} clampBehavior="strict" />
+        <TextInput key={form.key('title')} label="Film neve" withAsterisk {...form.getInputProps("title")} />
+        <TextInput key={form.key('movieImg')} label="Borítókép URL" {...form.getInputProps("coverUrl")} />
+        <Textarea key={form.key('description')} label="Leírás" {...form.getInputProps("description")} maxRows={5} />
+        <NumberInput key={form.key('duration')} label="Hossz" {...form.getInputProps("duration")} suffix=" perc" clampBehavior="strict"  min={0} />
         <Button type="submit">Módosítás mentése</Button>
       </Stack>
     </form>

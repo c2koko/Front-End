@@ -69,8 +69,8 @@ export function NavbarMinimal({toggle}: any) {
         {
             icon:IconCopyCheck,
             label: "Jegy Validálás",
-            url: "validateticket",
-            roles: ['Admin', 'Cashier']
+            url: "cashierlistmovies",
+            roles: ['Cashier']
         }
     ];
 

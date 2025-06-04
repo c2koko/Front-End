@@ -1,5 +1,6 @@
 import { Button, NumberInput, Stack } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
+import dayjs from "dayjs";
 import { useForm } from "@mantine/form";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/api.ts"; // majd bővítjük a screening metódussal
@@ -17,18 +18,8 @@ const AddScreening = () => {
 
   const handleSubmit = async (values: typeof form.values) => {
   try {
-    let screeningStartTimeISO: string;
-
-    if (values.screeningStartTime instanceof Date) {
-      screeningStartTimeISO = values.screeningStartTime.toISOString();
-    } else if (typeof values.screeningStartTime === 'string') {
-      screeningStartTimeISO = new Date(values.screeningStartTime).toISOString();
-    } else {
-      throw new Error("Érvénytelen dátum formátum a vetítéshez.");
-    }
-
     const screeningData = {
-      screeningStartTime: screeningStartTimeISO,
+      screeningStartTime: dayjs(values.screeningStartTime).format("YYYY-MM-DDTHH:mm:ss"),
       movieId: Number(movieId),
       roomId: values.roomId,
     };

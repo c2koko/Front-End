@@ -1,7 +1,7 @@
 import { ICreateMovie, IMovie, IMovieUpdate } from "../Interfaces/IMovie";
 import { IScreening, ICreateScreeningDto, IUpdateScreeningDto } from "../Interfaces/IScreening";
 import { IChair } from "../Interfaces/IChair.ts";
-import { IUser, IUserRegisterDto } from "../Interfaces/IUser.ts"
+import { IUser, IUserInfoDto, IUserRegisterDto } from "../Interfaces/IUser.ts"
 import {ITicket, ITicketCreateDto, ITicketVerifyDto} from "../Interfaces/ITicket.ts"
 import axiosInstance from "./axios.config";
 
@@ -16,6 +16,7 @@ const Auth = {
 }
 const Movies = {
     getMovie: () => axiosInstance.get<IMovie[]>(`/api/Movie/GetAllMovies`),
+    getMovieById: (id: string | number) => axiosInstance.get<IMovie>(`/api/Movie/GetMovieById/${id}`),
     updateMovie: (id: string, data: IMovieUpdate) => axiosInstance.put<IMovie>(`/api/Admin/UpdateMovie/${id}`, data),
     createMovie: (data: ICreateMovie) => axiosInstance.post<IMovie>('/api/Admin/CreateMovie', data),
     deleteMovie: (id: string) => axiosInstance.delete<void>(`/api/Admin/DeleteMovie/${id}`),
@@ -47,10 +48,17 @@ const Tickets = {
     deleteTicket: (id: number) =>
         axiosInstance.delete(`/api/Ticket/DeleteTicket/${id}`),
     verifyTicket: (id: number, data: ITicketVerifyDto) =>
-        axiosInstance.put<ITicket>(`/api/Ticket/VerifyTicket/${id}`, data),
+        axiosInstance.put<ITicket>(`/api/Cashier/VerifyTicket/${id}`, data),
     getTicketsByUserId: (userId: number) =>
         axiosInstance.get<ITicket[]>(`/api/Ticket/GetTicketsByUserId?id=${userId}`),
+    getTicketsByScreeningId: (screeningId: number) =>
+        axiosInstance.get<ITicket[]>(`/api/Ticket/GetTicketsForScreening/${screeningId}`),
 };
+
+const Users = {
+    getUserInfo: (userId: number) => axiosInstance.get<IUserInfoDto>(`/api/User/GetUserInfo/${userId}`),
+}
+
 
 
 
@@ -68,6 +76,6 @@ const Tickets = {
 // }
 
 
-const api = {Movies, Screenings, Seats, Auth, Tickets};
+const api = {Movies, Screenings, Seats, Auth, Tickets, Users};
 
 export default api;

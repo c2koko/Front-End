@@ -1,10 +1,11 @@
-import { Button, TextInput, Textarea, Stack, NumberInput } from "@mantine/core";
+import { Button, Stack, NumberInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import api from "../api/api.ts";
 import { useNavigate, useParams } from "react-router-dom";
 import { DateTimePicker } from "@mantine/dates";
-import { IScreening, IUpdateScreeningDto } from "../Interfaces/IScreening.ts";
+import dayjs from 'dayjs';
+import { IUpdateScreeningDto } from "../Interfaces/IScreening.ts";
 
 const UpdateScreening = () => {
   const { screeningId, movieId } = useParams();
@@ -16,7 +17,7 @@ const UpdateScreening = () => {
       roomId: 0,
     },
     validate: {
-        roomId: (id: number) => ((id >= 0 && id !== null) ? "A szoba Id-je pozitív egész szám legyen!" : null)
+        roomId: (id: number) => ((id < 0 || id == null) ? "A szoba Id-je pozitív egész szám legyen!" : null)
     }
   });
 
@@ -33,15 +34,12 @@ const UpdateScreening = () => {
         try {
         if (screeningId) {
             let res = await api.Screenings.getScreeningById(Number(screeningId));
-            let screening = res.data.$values;
 
-            console.log(screening);
-
-            if (screening) {
+            if (res) {
 
                 form.setValues({
-                    screeningStartTime: new Date(screening.screeningStartTime),
-                    roomId: screening.roomId
+                    screeningStartTime: new Date(res.data.screeningStartTime) ? new Date(res.data.screeningStartTime) : new Date(),
+                    roomId: res.data.roomId
                 })
             }
             else {
@@ -65,13 +63,15 @@ const UpdateScreening = () => {
   try {
     
     let updateDto: IUpdateScreeningDto = {
-        screeningStartTime: new Date(values.screeningStartTime).toISOString(),
-        movieId: movieId,
+        screeningStartTime: dayjs(values.screeningStartTime).format("YYYY-MM-DDTHH:mm:ss"),
+        movieId: Number(movieId),
         roomId: values.roomId
     }
 
-    await api.Screenings.updateScreening(updateDto);
-    // console.log("Vetítés létrehozva");
+    await api.Screenings.updateScreening(String(screeningId), updateDto);
+    console.log("Vetítés frissítve!");
+    console.log(updateDto);
+    
     navigate("/app/modifyMovie");
   } catch (error) {
     console.error("Hiba vetítés hozzáadásakor:", error);
@@ -82,10 +82,12 @@ const UpdateScreening = () => {
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack>
         <DateTimePicker
+          key={form.key('screeningStartTime')}
           label="Vetítés kezdete"
           {...form.getInputProps("screeningStartTime")}
         />
         <NumberInput
+          key={form.key('roomId')}
           label="Terem ID"
           min={1}
           {...form.getInputProps("roomId")}

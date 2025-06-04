@@ -20,3 +20,7 @@ export interface IUserRegisterDto {
   phone: string;
   roleId: number;
 }
+export interface IUserInfoDto {
+  name: string;
+  email: string;
+}

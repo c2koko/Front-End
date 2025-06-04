@@ -1,11 +1,8 @@
-import {Button, TextInput, Textarea, Card, Group, Image, Text, Badge, Box} from "@mantine/core";
-import {useForm} from "@mantine/form";
+import {Button, Card, Group, Image, Text} from "@mantine/core";
 import {useEffect, useState} from "react";
 import api from "../api/api.ts";
-import {useNavigate, useParams} from "react-router-dom";
-import axiosInstance from "../api/axios.config.ts";
-import { ICreateMovie, IMovie } from "../Interfaces/IMovie.ts";
-import { useSetState } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
+import { IMovie } from "../Interfaces/IMovie.ts";
 
 const ModifyMovies = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
@@ -30,7 +27,7 @@ const ModifyMovies = () => {
   };
 
     const cards = movies.map((movie) => (
-      <Card shadow="sm" padding="md" radius="md" withBorder key={movie.id}>
+      <Card shadow="sm" padding="md" radius="md" withBorder key={movie.id} mt={"md"}>
       <Card.Section>
         <Image
           src={movie.movieImg || '/image_jegymesterASCII.png'} height={160}alt={`${movie.movieName ?? 'Movie'} film borítókép`}

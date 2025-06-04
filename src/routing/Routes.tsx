@@ -13,6 +13,10 @@ import UserTickets from "../pages/UserTickets.tsx";
 import Register from "../pages/Register.tsx";
 import ModifyMovieScreening from "../pages/ModifyMovieScreenings.tsx";
 import UpdateScreening from "../pages/UpdateScreening.tsx";
+import CashierListMovies from "../pages/CashierListMovies.tsx";
+import CashierListScreenings from "../pages/CashierListScreenings.tsx";
+
+import VerifyTickets from "../pages/VerifyTickets.tsx";
 export const routes = [
     {
         path: "login",
@@ -77,6 +81,21 @@ export const routes = [
     {
         path: "purchase",
         component: <Purchase/>,
+        isPrivate: true
+    },
+    {
+        path: "cashierlistmovies",
+        component: <CashierListMovies/>,
+        isPrivate: true
+    },
+    {
+        path: "cashierlistcreenings/:movieId",
+        component: <CashierListScreenings/>,
+        isPrivate: true
+    },
+    {
+        path: "verifytickets/:movieId/:screeningId/verify",
+        component: <VerifyTickets/>,
         isPrivate: true
     },
     {

@@ -5,16 +5,13 @@ import api from "../api/api"; // ez tartalmazza a .Screenings.getScreening metó
 import { IScreening } from "../Interfaces/IScreening";
 import { IconCalendar, IconClock } from '@tabler/icons-react';
 
-const ScreeningsForMovie = () => {
-  const { movieId } = useParams();
+const CashierListScreenings = () => {
+  const { movieId, screeningId } = useParams();
   const [screenings, setScreenings] = useState<IScreening[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-
-    console.log("Vetítesek megtekintése")
-    console.log(movieId)
 
     if (!movieId) return;
     api.Screenings.getScreening(movieId)
@@ -33,16 +30,6 @@ const ScreeningsForMovie = () => {
   if (screenings.length === 0) return <Text>Nincs vetítés ehhez a filmhez.</Text>;
 
   console.log(screenings);
-
-  const deleteScreening = async (id: string) => {
-    try {
-      console.log(id);
-      await api.Screenings.deleteScreening(Number(id)); // Küldi a DELETE kérést
-      setScreenings((prev) => prev.filter((screening) => screening.id !== Number(id))); // Frissít frontenden
-    } catch (error) {
-      console.error("Hiba a film törlésekor:", error);
-    }
-  };
 
   return (
     <>
@@ -84,25 +71,14 @@ const ScreeningsForMovie = () => {
             </Group>
           </div>
 
-          <Group mt="md" gap="md">
             <Button
-              color="blue"
-              mt="md"
-              radius="md"
-              onClick={() => navigate(`/app/updateScreening/${movieId}/${screening.id}`)}
+                color="blue"
+                mt="md"
+                radius="md"
+                onClick={() => navigate(`/app/verifytickets/${movieId}/${screening.id}/verify`)}
             >
-              Módosítás
+                Jegyek
             </Button>
-
-            <Button
-              color="blue"
-              mt="md"
-              radius="md"
-              onClick={() => deleteScreening(screening.id.toString())}
-            >
-              Törlés
-            </Button>
-          </Group>
         </Group>
       </Card>
     );
@@ -111,4 +87,4 @@ const ScreeningsForMovie = () => {
   );
 };
 
-export default ScreeningsForMovie;
+export default CashierListScreenings;
