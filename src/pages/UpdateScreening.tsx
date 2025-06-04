@@ -92,7 +92,7 @@ const UpdateScreening = () => {
           min={1}
           {...form.getInputProps("roomId")}
         />
-        <Button type="submit">Vetítés hozzáadása</Button>
+        <Button type="submit">Vetítés módosítása</Button>
       </Stack>
     </form>
   );
